@@ -3,6 +3,7 @@ package algorithm
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 )
 
 type ValNode struct {
@@ -45,11 +46,18 @@ func SparseArray() {
 			}
 		}
 	}
-	sparseArrJson, _ := json.Marshal(sparseArr)
-	fmt.Println(string(sparseArrJson))
+
 	//输出稀疏数组
 	for i, v := range sparseArr {
 		fmt.Printf("%d:row:%d col:%d val:%d \n", i, v.Row, v.Col, v.Val)
 	}
-	//存盘
+	//存盘操作
+	sparseArrJson, _ := json.Marshal(sparseArr)
+	fmt.Println(string(sparseArrJson))
+	file := "d:/golang/2023/project/MyGinChat/data/sparse_arr.log"
+	err := ioutil.WriteFile(file, sparseArrJson, 0666)
+	if err != nil {
+		fmt.Println("read file err = %v", err)
+	}
+
 }
