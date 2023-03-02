@@ -1,5 +1,6 @@
 package algorithm
 
+//稀疏数组算法
 import (
 	"encoding/json"
 	"fmt"
@@ -18,6 +19,8 @@ func SparseArray() {
 	var chessMap [11][11]int
 	chessMap[1][2] = 1 //黑子
 	chessMap[2][3] = 2 //白子
+	chessMap[2][4] = 1 //白子
+
 	for _, v := range chessMap {
 		for _, v2 := range v {
 			fmt.Printf("%d\t", v2)
@@ -53,11 +56,43 @@ func SparseArray() {
 	}
 	//存盘操作
 	sparseArrJson, _ := json.Marshal(sparseArr)
-	fmt.Println(string(sparseArrJson))
+	addFile(sparseArrJson)
+	resumeData()
+}
+
+// 将稀疏后的数组进行存盘
+func addFile(sparseArrJson []byte) {
 	file := "d:/golang/2023/project/MyGinChat/data/sparse_arr.log"
 	err := ioutil.WriteFile(file, sparseArrJson, 0666)
 	if err != nil {
+		fmt.Println("write file err = %v", err)
+	}
+}
+
+// 将稀疏后的数组恢复
+func resumeData() {
+	var chessMap [11][11]int
+	file := "d:/golang/2023/project/MyGinChat/data/sparse_arr.log"
+	str, err := ioutil.ReadFile(file)
+	if err != nil {
 		fmt.Println("read file err = %v", err)
 	}
-
+	ValNode := []ValNode{}
+	err = json.Unmarshal(str, &ValNode)
+	if err != nil {
+		fmt.Println("json 解析失败")
+		return
+	}
+	for k, v := range ValNode {
+		if k == 0 {
+			continue
+		}
+		chessMap[v.Row][v.Col] = v.Val
+	}
+	for _, v := range chessMap {
+		for _, value := range v {
+			fmt.Printf("%d\t", value)
+		}
+		fmt.Println()
+	}
 }
