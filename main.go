@@ -5,7 +5,13 @@ import (
 )
 
 func main() {
-	algorithm.SparseArray()
+	//稀疏数组
+	//algorithm.SparseArray()
+
+	//singlequeue 单队列展示
+	//algorithm.UseSingleQueue()
+	algorithm.UseCircleQueue()
+
 	//r := 0
 	//z := 10
 	//for r < z {
