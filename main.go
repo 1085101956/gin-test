@@ -12,7 +12,8 @@ func main() {
 	//环形队列示例
 	//algorithm.UseCircleQueue()
 
-	//链表的使用
+	//链表的使用 单项链表
 	algorithm.UseHeroNode()
+	//双相链表的使用
 	algorithm.UseDoubleLink()
 }
