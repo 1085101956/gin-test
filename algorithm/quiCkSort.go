@@ -36,3 +36,12 @@ func QuickSorts(src []int, first, last int) {
 	QuickSorts(src, left, flag-1)
 	QuickSorts(src, flag+1, right)
 }
+
+//func quickSort(arr []int,left,right int) {
+//	key := arr[left]
+//	p := key
+//	i,j := left,right
+//	for i <= j {
+//
+//	}
+//}
