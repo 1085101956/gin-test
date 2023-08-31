@@ -8,9 +8,9 @@ import (
 )
 
 type ValNode struct {
-	Row int
-	Col int
-	Val int
+	Row int //行
+	Col int //列
+	Val int //值
 }
 
 // 一个稀疏数组算法
@@ -95,4 +95,47 @@ func resumeData() {
 		}
 		fmt.Println()
 	}
+}
+
+func SparseArr() {
+	//创建一个原始数组
+	var sparseArr [11][11]int
+	sparseArr[1][2] = 2 //2是黑子
+	sparseArr[2][3] = 1 //1是白子
+	for _, v := range sparseArr {
+		for _, val := range v {
+			fmt.Printf("%d \t", val)
+		}
+		fmt.Println(v)
+	}
+	sparseArrays := []ValNode{}
+	originalArr := ValNode{
+		Row: 11,
+		Col: 11,
+		Val: 0,
+	}
+	sparseArrays = append(sparseArrays, originalArr)
+	for x, y := range sparseArr {
+		for j, vv := range y {
+			if vv != 0 {
+				array := ValNode{
+					Row: x,
+					Col: j,
+					Val: vv,
+				}
+				sparseArrays = append(sparseArrays, array)
+			}
+		}
+	}
+	fmt.Println(sparseArrays)
+	//遍历稀疏数组，稀疏数组恢复
+	arrMap := [11][11]int{}
+	for z, s := range sparseArrays {
+		if z == 0 { //第一行过滤掉
+			continue
+		}
+		//赋值给数组
+		arrMap[s.Row][s.Col] = s.Val
+	}
+	fmt.Println(arrMap)
 }
